@@ -29,43 +29,55 @@ public class App {
         Role internRole = new Role("Intern", internPermissions);
         Role saleRole = new Role("Sale",salePermissions);
 
-        Department itDepartment = new Department();
-        Department salesDepartment = new Department();
+        Department itDepartment = new Department("IT Department");
+        Department salesDepartment = new Department("Sales Department");
 
         Employee khai = new Employee("Khai");
         Employee khiem = new Employee("Khiem");
         Employee vu = new Employee("Vu");
         Employee quan = new Employee("Quan");
 
-        khai.assignRole(itDepartment,regularRole);
-        khai.assignRole(salesDepartment,saleRole);
-        khiem.assignRole(itDepartment,headRole);
-        vu.assignRole(itDepartment,internRole);
-        quan.assignRole(itDepartment,internRole);
+        itDepartment.assignRole(khai,regularRole);
+        salesDepartment.assignRole(khai,saleRole);
+        itDepartment.assignRole(khiem, headRole);
+        itDepartment.assignRole(quan,internRole);
+        itDepartment.assignRole(vu,internRole);
 
         System.out.println("===================================================================");
         khai.employeeInfo();
         khiem.employeeInfo();
         vu.employeeInfo();
         quan.employeeInfo();
+        System.out.println("===================================================================");
+        itDepartment.listEmployees();
+        System.out.println("===================================================================");
         Project CS360 = new Project("CS360");
+        Project project2 = new Project("P2");
+        itDepartment.addProject(CS360);
+        itDepartment.addProject(project2);
+        itDepartment.listProjects();
 
         CS360.addEmployee(khai,regularRole);
         CS360.addEmployee(khiem,headRole);
         CS360.addEmployee(vu,internRole);
         CS360.addEmployee(quan,internRole);
 
-        System.out.println("===================================================================");
-        CS360.listAllEmployees();
+        project2.addEmployee(khai,headRole);
+        project2.addEmployee(khiem,regularRole);
 
         System.out.println("===================================================================");
-        khai.performAction(itDepartment,"ADD_PROJECT");
-        khiem.performAction(itDepartment, "DELETE_PROJECT"); //not allowed
-        khai.performAction(itDepartment,"DELETE_PROJECT");
-        quan.performAction(itDepartment,"EDIT_PROJECT");
-        vu.performAction(itDepartment,"VIEW_PROJECT");
-        vu.performAction(itDepartment,"ADD_PROJECT"); //not allowed
-        khai.performAction(salesDepartment,"VIEW_SALES"); //not allowed
+        CS360.listAllEmployees();
+        System.out.println("===================================================================");
+        project2.listAllEmployees();
+
+        System.out.println("===================================================================");
+        khai.performAction("ADD_PROJECT");
+        khiem.performAction("DELETE_PROJECT"); //not allowed
+        khai.performAction("DELETE_PROJECT");
+        quan.performAction("EDIT_PROJECT");
+        vu.performAction("VIEW_PROJECT");
+        vu.performAction("ADD_PROJECT"); //not allowed
+        khai.performAction("VIEW_SALES"); //not allowed
     }
 
 }

@@ -6,22 +6,16 @@ import java.util.Map;
 public class Project {
     private String projectName;
     private Map<Employee, Role> projectTeam = new HashMap<>();
+
     public Project(String projectName){
         this.projectName = projectName;
     }
-    public void setProjectName(String projectName){
-        this.projectName = projectName;
-    }
+
     public String getProjectName(){
         return this.projectName;
     }
-
     public Map<Employee, Role> getProjectTeam() {
         return projectTeam;
-    }
-
-    public void setProjectTeam(Map<Employee, Role> projectTeam) {
-        this.projectTeam = projectTeam;
     }
 
     public void addEmployee(Employee employee, Role role){
