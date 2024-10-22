@@ -6,8 +6,8 @@ import java.util.Map;
 public class Project {
     private String projectName;
     private Map<Employee, Role> projectTeam = new HashMap<>();
-    public Project(String taskName){
-        this.projectName = taskName;
+    public Project(String projectName){
+        this.projectName = projectName;
     }
     public void setProjectName(String projectName){
         this.projectName = projectName;
@@ -47,17 +47,7 @@ public class Project {
     }
     public void listAllEmployees(){
         for(Map.Entry<Employee,Role> entry : projectTeam.entrySet()){
-            System.out.println("Employee: " + entry.getKey().getName() + "--> Role: " + entry.getValue().getName());
-        }
-    }
-
-    public void performAction(Employee employee, String action) {
-        Role role = projectTeam.get(employee);
-        if (role != null && role.getPermissions().contains(action)){
-            System.out.println("Employee " + employee.getName() + " is able to perform " + action);
-        }
-        else {
-            System.out.println("Employee " + employee.getName() + " does not have permission to perform " + action);
+            System.out.println("Project: " + this.projectName + " ==> Employee: " + entry.getKey().getName() + " --> Role: " + entry.getValue().getName());
         }
     }
 

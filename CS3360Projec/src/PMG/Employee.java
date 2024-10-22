@@ -13,6 +13,24 @@ public class Employee {
         this.name = name;
     }
 
+    public Department getDepartment(){
+        if (roleMap.isEmpty()){
+            return null;
+        }
+        else {
+            return roleMap.keySet().iterator().next();
+        }
+    }
+
+    public Role getRole() {
+        if (roleMap.isEmpty()){
+            return null;
+        }
+        else {
+            return roleMap.values().iterator().next();
+        }
+    }
+
     public String getName(){
         return this.name;
     }
@@ -35,10 +53,15 @@ public class Employee {
     }
 
     public void assignRole(Department department, Role role){
-        roleMap.put(department,role);
-        departmentPermissions.put(department,new HashSet<>());
+        if (roleMap.isEmpty()){
+            roleMap.put(department,role);
+            departmentPermissions.put(department,new HashSet<>());
+            departmentPermissions.get(department).addAll(role.getPermissions());
+        }
+        else {
+            System.out.println("Employee " + this.getName() + " is already assigned to a department.");
+        }
 
-        departmentPermissions.get(department).addAll(role.getPermissions());
     }
 
     public boolean hasPermission(Department department, String permissions) {
@@ -48,6 +71,24 @@ public class Employee {
     public void updatePermission(Department department, String permissions) {
         if (departmentPermissions.containsKey(department)){
             departmentPermissions.get(department).add(permissions);
+        }
+    }
+    public void performAction(Department department, String action){
+        if (hasPermission(department,action)){
+            System.out.println("Employee: " + this.getName() + " performed action: " + action);
+        }
+        else {
+            System.out.println("Employee: " + this.getName() + " is not allowed to perform the action.");
+        }
+    }
+    public void employeeInfo(){
+        Department department = getDepartment();
+        Role role = getRole();
+        if (department != null & role != null) {
+            System.out.println("Employee: " + this.getName() + " --> Department: " + department.getName() + " --> Department's Role: " + role.getName());
+        }
+        else {
+            System.out.println("Employee: " + this.getName() + " is not assigned to any Department.");
         }
     }
 }

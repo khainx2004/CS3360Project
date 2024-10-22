@@ -20,11 +20,17 @@ public class App {
         internPermissions.add("EDIT_PROJECT");
         internPermissions.add("VIEW_PROJECT");
 
+        Set<String> salePermissions = new HashSet<>();
+        salePermissions.add("VIEW_CUSTOMERS");
+        salePermissions.add("VIEW_SALES");
+
         Role headRole = new Role("Head",headPermissions);
         Role regularRole = new Role("Regular", regularPermissions);
         Role internRole = new Role("Intern", internPermissions);
+        Role saleRole = new Role("Sale",salePermissions);
 
         Department itDepartment = new Department();
+        Department salesDepartment = new Department();
 
         Employee khai = new Employee("Khai");
         Employee khiem = new Employee("Khiem");
@@ -32,10 +38,16 @@ public class App {
         Employee quan = new Employee("Quan");
 
         khai.assignRole(itDepartment,regularRole);
+        khai.assignRole(salesDepartment,saleRole);
         khiem.assignRole(itDepartment,headRole);
         vu.assignRole(itDepartment,internRole);
         quan.assignRole(itDepartment,internRole);
 
+        System.out.println("===================================================================");
+        khai.employeeInfo();
+        khiem.employeeInfo();
+        vu.employeeInfo();
+        quan.employeeInfo();
         Project CS360 = new Project("CS360");
 
         CS360.addEmployee(khai,regularRole);
@@ -43,12 +55,17 @@ public class App {
         CS360.addEmployee(vu,internRole);
         CS360.addEmployee(quan,internRole);
 
-        CS360.performAction(khai,"ADD_PROJECT");
-        CS360.performAction(khiem, "DELETE_PROJECT");
-        CS360.performAction(khai,"DELETE_PROJECT");
-        CS360.performAction(quan,"EDIT_PROJECT");
-        CS360.performAction(vu,"VIEW_PROJECT");
-        CS360.performAction(vu,"ADD_PROJECT");
+        System.out.println("===================================================================");
+        CS360.listAllEmployees();
+
+        System.out.println("===================================================================");
+        khai.performAction(itDepartment,"ADD_PROJECT");
+        khiem.performAction(itDepartment, "DELETE_PROJECT"); //not allowed
+        khai.performAction(itDepartment,"DELETE_PROJECT");
+        quan.performAction(itDepartment,"EDIT_PROJECT");
+        vu.performAction(itDepartment,"VIEW_PROJECT");
+        vu.performAction(itDepartment,"ADD_PROJECT"); //not allowed
+        khai.performAction(salesDepartment,"VIEW_SALES"); //not allowed
     }
 
 }
