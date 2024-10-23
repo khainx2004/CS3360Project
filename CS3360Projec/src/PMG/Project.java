@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class Project {
     private String projectName;
-    private Map<Employee, Role> projectTeam = new HashMap<>();
+    private Map<Employee, Role> projectRole = new HashMap<>();
 
     public Project(String projectName){
         this.projectName = projectName;
@@ -14,16 +14,16 @@ public class Project {
     public String getProjectName(){
         return this.projectName;
     }
-    public Map<Employee, Role> getProjectTeam() {
-        return projectTeam;
+    public Map<Employee, Role> getProjectRole() {
+        return projectRole;
     }
 
     public void addEmployee(Employee employee, Role role){
-        projectTeam.put(employee,role);
+        projectRole.put(employee,role);
     }
     public void editEmployeeRole(Employee employee, Role role){
-        if (projectTeam.containsKey(employee)){
-            projectTeam.put(employee,role);
+        if (projectRole.containsKey(employee)){
+            projectRole.put(employee,role);
             System.out.println("Edit Employee's Role successfully.");
         }
         else {
@@ -31,8 +31,8 @@ public class Project {
         }
     }
     public void removeEmployee(Employee employee){
-        if (projectTeam.containsKey(employee)){
-            projectTeam.remove(employee);
+        if (projectRole.containsKey(employee)){
+            projectRole.remove(employee);
             System.out.println("Removed employee: " + employee.getName());
         }
         else {
@@ -40,7 +40,7 @@ public class Project {
         }
     }
     public void listAllEmployees(){
-        for(Map.Entry<Employee,Role> entry : projectTeam.entrySet()){
+        for(Map.Entry<Employee,Role> entry : projectRole.entrySet()){
             System.out.println("Project: " + this.projectName + " ==> Employee: " + entry.getKey().getName() + " --> Role: " + entry.getValue().getName());
         }
     }
